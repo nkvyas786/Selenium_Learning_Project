@@ -1,5 +1,6 @@
 package utils;
 import org.testng.Assert;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -15,6 +16,15 @@ public class TestUtil {
                 new Object[] { "data2" }
         };
     }
+
+
+    public static void report(){
+
+        ExtentReportUtility.config();
+
+    }
+
+
 
     @Test(dataProvider = "data")
     public void test(String data) {
