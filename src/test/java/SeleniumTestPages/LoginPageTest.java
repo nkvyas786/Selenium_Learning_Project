@@ -17,9 +17,7 @@ public class LoginPageTest extends TestBase {
 
     public LoginPageTest() throws IOException {
         super();
-
     }
-
 
     @BeforeMethod
     public void setUp() throws IOException {
@@ -37,8 +35,7 @@ public class LoginPageTest extends TestBase {
     @Test(priority=2)
     public void loginTitleValidateMethod() {
         String title = loginPage.PageTitle();
-        assertEquals("Let's Shop", title);
-
+        assertEquals("Login Page title is not matching", "Let's Shop", title);
         System.out.println("Login Page Title is: " + title);
     }
 
@@ -46,7 +43,7 @@ public class LoginPageTest extends TestBase {
     public void loginTest() throws IOException {
 
         homePage = loginPage.loginApplication(prop.getProperty("username"), prop.getProperty("password"));
-        //homePage = loginPage.loginApplication("nkvyas786@gmail.com", "Garvi@1234");
+
     }
 
     @Test(priority = -1)

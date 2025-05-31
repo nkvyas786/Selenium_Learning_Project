@@ -1,17 +1,11 @@
 package com.sfd.qa.pages;
-
 import com.nar.qa.base.TestBase;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import java.io.IOException;
 import java.util.List;
 
 public class HomePage extends TestBase {
-
-    WebDriver driver;
 
     @FindBy(css = ".col-lg-4")
     List<WebElement> productList;
@@ -22,12 +16,20 @@ public class HomePage extends TestBase {
     @FindBy(linkText = "QA Meetup with Rahul Shetty @Pune - Limited Seats! Book Now!")
     WebElement QAMeetupLink;
 
+    @FindBy(xpath = "//button[@routerlink='/dashboard/myorders']")
+    WebElement ordersLink;
 
-    public HomePage() throws IOException {
-        super();
+    @FindBy(xpath = "//button[@routerlink='/dashboard/cart']")
+    WebElement cartLink;
 
+    //initializing the Page Objects:
+    public HomePage() {
         PageFactory.initElements(driver, this);
 
+    }
+
+    public String verifyHomePageTitle() {
+        return driver.getTitle();
     }
 
     public void getProductList() {
@@ -39,28 +41,44 @@ public class HomePage extends TestBase {
         //productList.stream().filter(product ->product.getText().equals("ZARA COAT 3"));
     }
 
-    public void getCheckBoxes(){
+    public void getCheckBoxesAndClick(){
 
         for(WebElement checkBox : checkBoxes){
 
             System.out.println(checkBox.getText());
             System.out.println(checkBox.isSelected());
             System.out.println(checkBoxes.size());
+
+            checkBox.click();
+            System.out.println(checkBox.isSelected());
+
         }
 
+    }
 
-      }
-
-      public void clickOnQAMeetupLink(){
-          if(QAMeetupLink.isDisplayed()){
+      public void clickOnQAMeetupLink() {
+          if (QAMeetupLink.isDisplayed()) {
               QAMeetupLink.click();
           }
+    }
 
+    public OrdersPage clickOnOrdersLink() {
+        if (ordersLink.isDisplayed()) {
+            ordersLink.click();
+        }
+        return new OrdersPage();
 
+    }
 
+    public CartPage clickOnCartLink() {
+        if (cartLink.isDisplayed()) {
+            cartLink.click();
+        }
 
+        return new CartPage();
+    }
 
-      }}
+}
 
 
 

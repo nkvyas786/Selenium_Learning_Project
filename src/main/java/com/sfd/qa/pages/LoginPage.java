@@ -10,6 +10,8 @@ import java.util.List;
 
 public class LoginPage extends TestBase{
 
+
+    //PageFactoryConfiguration
     @FindBy(id = "userEmail")
     WebElement username;
 
@@ -22,8 +24,10 @@ public class LoginPage extends TestBase{
     @FindBy(tagName = "a")
     List<WebElement> links;
 
+
+    //initializing the Page Objects:
     public LoginPage(){
-        super();
+        //super();
 
         PageFactory.initElements(driver, this);
     }

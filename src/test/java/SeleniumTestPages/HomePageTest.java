@@ -2,33 +2,34 @@ package SeleniumTestPages;
 
 import com.listeners.Retry;
 import com.nar.qa.base.TestBase;
+import com.sfd.qa.pages.CartPage;
 import com.sfd.qa.pages.HomePage;
 import com.sfd.qa.pages.LoginPage;
+import com.sfd.qa.pages.OrdersPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
-import utils.ExtentReportUtility;
-
 import java.io.IOException;
 import java.util.Set;
+
+import static junit.framework.Assert.assertEquals;
 
 
 public class HomePageTest extends TestBase {
 
-    WebDriver driver;
     LoginPage loginPage;
     HomePage homePage;
     LoginPageTest loginPageTest;
-    public static ExtentReportUtility extentReportUtility;
+    OrdersPage ordersPage;
+    CartPage cartPage;
 
 
     //constructor
-    public HomePageTest() throws IOException {
+    public HomePageTest() {
         super();
-        //this.driver = driver;
-       // super();
-        this.loginPageTest = new LoginPageTest();
+
+        //this.loginPageTest = new LoginPageTest();
 
     }
 
@@ -36,20 +37,26 @@ public class HomePageTest extends TestBase {
     public void setUp() throws IOException {
         initialization();
         loginPage = new LoginPage();
-       loginPage.loginApplication("nkvyas786@gmail.com", "Garvi@1234");
-        homePage = new HomePage();
+        homePage = loginPage.loginApplication(prop.getProperty("username"), prop.getProperty("password"));
+    }
+
+    @Test(priority=0)
+    public void getTitle() {
+        String HomePagTitle =   homePage.verifyHomePageTitle();
+        assertEquals("Home Page title is not matching", "Let's Shop", HomePagTitle);
+        System.out.println("Home Page Title is: " + HomePagTitle);
     }
 
     @Test(priority=1, retryAnalyzer = Retry.class)
     public void productListCount() {
 
         homePage.getProductList();
-
     }
-    @Test(priority=2)
-    public void getCheckBoxDetail(){
 
-        homePage.getCheckBoxes();
+    @Test(priority=2)
+    public void getCheckBoxDetailThenClick(){
+
+        homePage.getCheckBoxesAndClick();
     }
 
     @Test(priority=3)
@@ -74,29 +81,33 @@ public class HomePageTest extends TestBase {
 
         // 6. (Optional) Switch back to the original window
         driver.switchTo().window(parentWindow);
+    }
 
+    @Test
+    public void clickOnOrderPageLink() {
+        ordersPage = homePage.clickOnOrdersLink();
+        System.out.println("Orders Page is clicked");
+    }
 
-
-
-
-
+    @Test
+    public void clickOnCartPageLink() {
+        cartPage =  homePage.clickOnCartLink();
+        System.out.println("Cart Page is clicked");
 
     }
 
 
 
-
+//@Test
 //    public void selectAllCheckBoxes(){
 //
-//        homePage.getCheckBoxes();
-//        for (int i=0; i<=checkBoxes.size(); i++){
+//        homePage.getCheckBoxesAndClick();
+
+    //        for (int i=0; i<=checkBoxes.size(); i++){
 //            checkBoxes.get(i).click();
 //        }
 //    }
-
-
-
-
+//
 
     @AfterMethod
     public void closeBrw() {
