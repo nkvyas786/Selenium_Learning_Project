@@ -1,21 +1,22 @@
 package SeleniumTestPages;
 
-import com.google.gson.JsonArray;
 import com.listeners.Retry;
+import com.nar.qa.base.TestBase;
 import com.sfd.qa.pages.HomePage;
 import com.sfd.qa.pages.LoginPage;
-import com.sfd.qa.pages.TestBase;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 import utils.ExtentReportUtility;
-import utils.TestUtil;
 
 import java.io.IOException;
+import java.util.Set;
 
 
 public class HomePageTest extends TestBase {
 
-   private WebDriver driver;
+    WebDriver driver;
     LoginPage loginPage;
     HomePage homePage;
     LoginPageTest loginPageTest;
@@ -23,9 +24,11 @@ public class HomePageTest extends TestBase {
 
 
     //constructor
-    public HomePageTest() {
+    public HomePageTest() throws IOException {
         super();
-       this.loginPageTest = new LoginPageTest();
+        //this.driver = driver;
+       // super();
+        this.loginPageTest = new LoginPageTest();
 
     }
 
@@ -49,13 +52,49 @@ public class HomePageTest extends TestBase {
         homePage.getCheckBoxes();
     }
 
+    @Test(priority=3)
+    public void clickQAMeetupLink(){
+
+        String parentWindow = driver.getWindowHandle();
+
+        homePage.clickOnQAMeetupLink();
+
+        Set<String> allWindows = driver.getWindowHandles();
+
+        // 4. Switch to the new window
+        for (String windowId : allWindows) {
+            if (!windowId.equals(parentWindow)) {
+                driver.switchTo().window(windowId);
+                break;
+            }
+        }
+
+        WebElement newWindowElement = driver.findElement(By.className("menu_item"));
+        System.out.println(newWindowElement.getText());
+
+        // 6. (Optional) Switch back to the original window
+        driver.switchTo().window(parentWindow);
+
+
+
+
+
+
+
+    }
+
+
+
+
 //    public void selectAllCheckBoxes(){
 //
 //        homePage.getCheckBoxes();
 //        for (int i=0; i<=checkBoxes.size(); i++){
 //            checkBoxes.get(i).click();
 //        }
- //   }
+//    }
+
+
 
 
 

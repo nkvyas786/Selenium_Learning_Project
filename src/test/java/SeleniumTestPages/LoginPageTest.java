@@ -1,15 +1,10 @@
 package SeleniumTestPages;
+import com.nar.qa.base.TestBase;
 import com.sfd.qa.pages.HomePage;
 import com.sfd.qa.pages.LoginPage;
-import com.sfd.qa.pages.TestBase;
-import junit.framework.Assert;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import utils.ExtentReportUtility;
-import utils.TestUtil;
 
 import java.io.IOException;
 
@@ -20,8 +15,7 @@ public class LoginPageTest extends TestBase {
     LoginPage loginPage;
     HomePage homePage;
 
-    public LoginPageTest() {
-
+    public LoginPageTest() throws IOException {
         super();
 
     }
@@ -43,19 +37,21 @@ public class LoginPageTest extends TestBase {
     @Test(priority=2)
     public void loginTitleValidateMethod() {
         String title = loginPage.PageTitle();
-        assertEquals( "Let's Shop", title);
+        assertEquals("Let's Shop", title);
 
         System.out.println("Login Page Title is: " + title);
     }
 
     @Test(priority=1)
-    public void loginTest() {
+    public void loginTest() throws IOException {
 
-        homePage = loginPage.loginApplication("nkvyas786@gmail.com", "Garvi@1234");
+        homePage = loginPage.loginApplication(prop.getProperty("username"), prop.getProperty("password"));
+        //homePage = loginPage.loginApplication("nkvyas786@gmail.com", "Garvi@1234");
     }
 
     @Test(priority = -1)
     public void getLinkCount(){
+
         loginPage.GetAllLinks();
     }
 

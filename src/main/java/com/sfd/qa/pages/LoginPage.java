@@ -1,9 +1,11 @@
 package com.sfd.qa.pages;
 import org.openqa.selenium.WebDriver;
+import com.nar.qa.base.TestBase;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.io.IOException;
 import java.util.List;
 
 public class LoginPage extends TestBase{
@@ -20,12 +22,13 @@ public class LoginPage extends TestBase{
     @FindBy(tagName = "a")
     List<WebElement> links;
 
-    public LoginPage() {
+    public LoginPage(){
+        super();
 
         PageFactory.initElements(driver, this);
     }
 
-    public HomePage loginApplication(String email, String passWord) {
+    public HomePage loginApplication(String email, String passWord) throws IOException {
 
         try {
             username.sendKeys(email);
