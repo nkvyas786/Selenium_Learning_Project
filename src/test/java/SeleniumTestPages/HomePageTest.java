@@ -9,21 +9,25 @@ import com.sfd.qa.pages.OrdersPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Set;
 
+
+import static com.nar.qa.base.TestBase.driver;
 import static junit.framework.Assert.assertEquals;
 
 
 public class HomePageTest extends TestBase {
-
+    WebDriverWait wait;
+    WebDriver driver;
     LoginPage loginPage;
     HomePage homePage;
-    LoginPageTest loginPageTest;
     OrdersPage ordersPage;
     CartPage cartPage;
-
 
     //constructor
     public HomePageTest() {
@@ -40,27 +44,46 @@ public class HomePageTest extends TestBase {
         homePage = loginPage.loginApplication(prop.getProperty("username"), prop.getProperty("password"));
     }
 
-    @Test(priority=0)
+    @Test(priority = 0)
     public void getTitle() {
-        String HomePagTitle =   homePage.verifyHomePageTitle();
+        String HomePagTitle = homePage.verifyHomePageTitle();
         assertEquals("Home Page title is not matching", "Let's Shop", HomePagTitle);
         System.out.println("Home Page Title is: " + HomePagTitle);
     }
 
-    @Test(priority=1, retryAnalyzer = Retry.class)
+    @Test(priority = 1, retryAnalyzer = Retry.class)
     public void productListCount() {
 
         homePage.getProductList();
     }
 
-    @Test(priority=2)
-    public void getCheckBoxDetailThenClick(){
+    @Test
+    public void ActionOnCategoryDropdown() {
+        try {
 
-        homePage.getCheckBoxesAndClick();
+            homePage.clickOnCategoryDropdown();
+            Thread.sleep(5000);
+
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    @Test(priority=3)
-    public void clickQAMeetupLink(){
+    @Test(priority = 2)
+    public void getCheckBoxDetailThenClick() {
+        try {
+            homePage.getCheckBoxesAndClick();
+
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
+    @Test(priority = 3)
+    public void clickQAMeetupLink() {
 
         String parentWindow = driver.getWindowHandle();
 
@@ -90,24 +113,35 @@ public class HomePageTest extends TestBase {
     }
 
     @Test
-    public void clickOnCartPageLink() {
-        cartPage =  homePage.clickOnCartLink();
+    public void clickOnCartPageLink() throws InterruptedException {
+        cartPage = homePage.clickOnCartLink();
         System.out.println("Cart Page is clicked");
+        Thread.sleep(5000);
 
     }
 
+    @Test()
+    public void checkElectronics() throws InterruptedException {
+        homePage.selectElectronics();
+        Thread.sleep(2000);
+    }
 
-
-//@Test
-//    public void selectAllCheckBoxes(){
+    @Test
+    public void selectIphoneToCart() throws InterruptedException {
+        homePage.selectElectronics();
+        Thread.sleep(2000);
+        homePage.addToCartIphone();
+        Thread.sleep(2000);
+        homePage.clickOnCartLink();
+        Thread.sleep(2000);
+    }
+  //  public void addToCartIphone () {
+//        By addToCartButton = By.xpath("//b[normalize-space()='IPHONE 13 PRO']//parent::h5//following-sibling::button[2]//child::i[@class='fa fa-shopping-cart']");
 //
-//        homePage.getCheckBoxesAndClick();
-
-    //        for (int i=0; i<=checkBoxes.size(); i++){
-//            checkBoxes.get(i).click();
-//        }
-//    }
-//
+//        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(addToCartButton));
+//        //homePage.addToCartIphone();
+   // }
 
     @AfterMethod
     public void closeBrw() {
@@ -116,7 +150,5 @@ public class HomePageTest extends TestBase {
     } else{
         System.out.println("Driver is not initialized.");
 
-    }}
-}
-
+    }}}
 

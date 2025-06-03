@@ -10,8 +10,13 @@ public class HomePage extends TestBase {
     @FindBy(css = ".col-lg-4")
     List<WebElement> productList;
 
-    @FindBy(xpath = "//input[@type='checkbox']")
+    //@FindBy(xpath = "//input[@type='checkbox']")
+    //@FindBy(xpath="//input[@type='checkbox']/parent::div[@class='form-group ng-star-inserted']/parent::div/h6/parent::div/parent::form/preceding-sibling::div[@class='border-bottom pb-2 ml-2 p-4']")
+    @FindBy(xpath="//div[@class='py-2 border-bottom ml-3']//label[@for='cat']/preceding-sibling::input[@type='checkbox']")
     List<WebElement> checkBoxes;
+
+    @FindBy(xpath="//div[@class='py-2 border-bottom ml-3 p-4']/h6/parent::div/child::div[@class='form-group ng-star-inserted']/label[@for='cat']")
+    WebElement categoryDropdown;
 
     @FindBy(linkText = "QA Meetup with Rahul Shetty @Pune - Limited Seats! Book Now!")
     WebElement QAMeetupLink;
@@ -21,6 +26,16 @@ public class HomePage extends TestBase {
 
     @FindBy(xpath = "//button[@routerlink='/dashboard/cart']")
     WebElement cartLink;
+
+
+    //@FindBy(xpath="//div[@class='py-2 border-bottom ml-3 p-4']//div[@class='form-group ng-star-inserted']//input[@type='checkbox']//following-sibling::label[normalize-space()='electronics']")
+    @FindBy(xpath = "(//input[@type='checkbox'])[13]")
+    //@FindBy(xpath="//div[@class='py-2 border-bottom ml-3 p-4']//input[@type='checkbox']//following-sibling::label[text()[normalize-space() = 'electronics']]")
+    WebElement electronicsCheckBox;
+
+   @FindBy(xpath= "//b[normalize-space()='IPHONE 13 PRO']//parent::h5//following-sibling::button[2]//child::i[@class='fa fa-shopping-cart']")
+   WebElement addToCartButton;
+
 
     //initializing the Page Objects:
     public HomePage() {
@@ -43,17 +58,29 @@ public class HomePage extends TestBase {
 
     public void getCheckBoxesAndClick(){
 
-        for(WebElement checkBox : checkBoxes){
+        //for(WebElement checkBox : checkBoxes){
+        for (int i = 0; i < checkBoxes.size(); i++) {
+            if (checkBoxes.get(i).isDisplayed() && checkBoxes.get(i).isEnabled()) {
+                System.out.println("Checkbox is displayed at index : " + i + " Clicking on it now");
 
-            System.out.println(checkBox.getText());
-            System.out.println(checkBox.isSelected());
+                checkBoxes.get(i).click();
+            }
+
+            //System.out.println(checkBoxes.getText());
+            //System.out.println(checkBoxes.isSelected());
             System.out.println(checkBoxes.size());
 
-            checkBox.click();
-            System.out.println(checkBox.isSelected());
+//            checkBox.click();
+//            System.out.println(checkBox.isSelected());
 
         }
 
+    }
+
+    public void clickOnCategoryDropdown() {
+        if (categoryDropdown.isDisplayed()) {
+            categoryDropdown.click();
+        }
     }
 
       public void clickOnQAMeetupLink() {
@@ -78,7 +105,20 @@ public class HomePage extends TestBase {
         return new CartPage();
     }
 
-}
+
+    public void selectElectronics () {
+        if (electronicsCheckBox.isDisplayed() && electronicsCheckBox.isEnabled() && !electronicsCheckBox.isSelected()) {
+            electronicsCheckBox.click();
+        }}
+
+
+    public void addToCartIphone () {
+            if (addToCartButton.isDisplayed() && addToCartButton.isEnabled()) {
+                addToCartButton.click();
+            }
+
+
+    }}
 
 
 

@@ -2,6 +2,7 @@ package com.sfd.qa.pages;
 import org.openqa.selenium.WebDriver;
 import com.nar.qa.base.TestBase;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -13,6 +14,9 @@ public class LoginPage extends TestBase{
 
     //PageFactoryConfiguration
     @FindBy(id = "userEmail")
+    @CacheLookup  // Will pick that element from cache memory instead of DOM but in this case
+            // element got refreshed on DOM that CacheLookUp will be failed as it's directly picking from cache
+            //instead of DOM but it will make our execution fast
     WebElement username;
 
     @FindBy(id = "userPassword")
