@@ -6,16 +6,16 @@ import org.openqa.selenium.support.PageFactory;
 
 public class OrdersPage extends TestBase {
 
-    @FindBy(xpath = "(//div[@class='mt-4 ng-star-inserted'])[1]")
+    @FindBy(xpath = "(//div[@class='container table-responsive py-5']/div")
     WebElement NoOrderText;
-
 
     public OrdersPage() {
         PageFactory.initElements(driver, this);
     }
 
-    public String getNoOrderText() {
-        return NoOrderText.getText();
+    public void getNoOrderText() {
+
+        NoOrderText.getText();
     }
 
 

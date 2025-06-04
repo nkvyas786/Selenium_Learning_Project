@@ -8,7 +8,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 public class TestBase {
 
@@ -58,8 +57,8 @@ public class TestBase {
 //        WebDriverManager.chromedriver().setup();
 //        driver = new ChromeDriver();
 
-        driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT);
+        driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT);
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
 
@@ -68,8 +67,6 @@ public class TestBase {
         //driver.get(prop.getProperty("url"));
         //driver.navigate().to("https://rahulshettyacademy.com/client");
         //driver.get("https://rahulshettyacademy.com/client");
-
-
     }
 }
 

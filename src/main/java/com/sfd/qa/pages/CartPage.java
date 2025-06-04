@@ -1,7 +1,5 @@
 package com.sfd.qa.pages;
-
 import com.nar.qa.base.TestBase;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -21,9 +19,10 @@ public class CartPage extends TestBase {
     @FindBy(xpath=("//button[normalize-space()='Checkout']"))
     WebElement CheckOutButton;
 
-    public CartPage() {
 
-    PageFactory.initElements(driver, this);
+    //initializing the Page Objects:
+    public CartPage() {
+        PageFactory.initElements(driver, this);
 
     }
 
@@ -40,21 +39,20 @@ public class CartPage extends TestBase {
 
     public HomePage clickContinueShoppingButton() {
         ContinueShoppingButton.click();
-
         return new HomePage();
     }
 
-    public OrdersPage actionCheckOutButton() {
+    public PaymentPage actionCheckOutButton() {
         if (CheckOutButton.isDisplayed() && CheckOutButton.isEnabled()) {
-         CheckOutButton.click();
-     }
-        return  new OrdersPage();
+            CheckOutButton.click();
+        }
+            return new PaymentPage();
+
+
+        }
 
 
 
 
 
-
-
-
-}}
+}

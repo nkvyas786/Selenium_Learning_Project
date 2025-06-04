@@ -18,10 +18,11 @@ public class HomePage extends TestBase {
     @FindBy(xpath="//div[@class='py-2 border-bottom ml-3 p-4']/h6/parent::div/child::div[@class='form-group ng-star-inserted']/label[@for='cat']")
     WebElement categoryDropdown;
 
-    @FindBy(linkText = "QA Meetup with Rahul Shetty @Pune - Limited Seats! Book Now!")
+    @FindBy(xpath = "//a[@class='blinkingText']")
     WebElement QAMeetupLink;
 
-    @FindBy(xpath = "//button[@routerlink='/dashboard/myorders']")
+    //@FindBy(xpath = "//button[@routerlink='/dashboard/myorders']")
+    @FindBy(xpath = "//i[@class='fa fa-handshake-o']")
     WebElement ordersLink;
 
     @FindBy(xpath = "//button[@routerlink='/dashboard/cart']")
@@ -78,12 +79,6 @@ public class HomePage extends TestBase {
 
         }
 
-    }
-
-    public void clickOnCategoryDropdown() {
-        if (categoryDropdown.isDisplayed()) {
-            categoryDropdown.click();
-        }
     }
 
       public void clickOnQAMeetupLink() {

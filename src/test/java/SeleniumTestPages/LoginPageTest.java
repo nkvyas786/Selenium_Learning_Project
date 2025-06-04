@@ -15,12 +15,12 @@ public class LoginPageTest extends TestBase {
     LoginPage loginPage;
     HomePage homePage;
 
-    public LoginPageTest() throws IOException {
+    public LoginPageTest() {
         super();
     }
 
     @BeforeMethod
-    public void setUp() throws IOException {
+    public void setUp() {
         initialization();
         loginPage = new LoginPage();
     }
@@ -39,7 +39,7 @@ public class LoginPageTest extends TestBase {
         System.out.println("Login Page Title is: " + title);
     }
 
-    @Test(priority=1)
+    @Test(priority=4)
     public void loginTest() throws IOException {
 
         homePage = loginPage.loginApplication(prop.getProperty("username"), prop.getProperty("password"));
