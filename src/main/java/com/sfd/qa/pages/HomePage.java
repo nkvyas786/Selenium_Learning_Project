@@ -27,6 +27,9 @@ public class HomePage extends TestBase {
     @FindBy(xpath = "//button[@routerlink='/dashboard/cart']")
     WebElement cartLink;
 
+    @FindBy(xpath=("//button[normalize-space()='Continue Shopping']"))
+    WebElement CheckOutButton;
+
 
     //@FindBy(xpath="//div[@class='py-2 border-bottom ml-3 p-4']//div[@class='form-group ng-star-inserted']//input[@type='checkbox']//following-sibling::label[normalize-space()='electronics']")
     @FindBy(xpath = "(//input[@type='checkbox'])[13]")
@@ -116,6 +119,8 @@ public class HomePage extends TestBase {
             if (addToCartButton.isDisplayed() && addToCartButton.isEnabled()) {
                 addToCartButton.click();
             }
+
+
 
 
     }}

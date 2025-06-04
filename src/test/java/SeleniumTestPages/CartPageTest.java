@@ -24,8 +24,8 @@ public class CartPageTest extends TestBase {
 
     public CartPageTest() {
         super();
-        //this.homePageTest = homePageTest;
 
+        //this.homePageTest = homePageTest;
     }
 
     @BeforeMethod
@@ -37,8 +37,9 @@ public class CartPageTest extends TestBase {
         ordersPage = new OrdersPage();
         cartPage = new CartPage();
         homePage = loginPage.loginApplication(prop.getProperty("username"), prop.getProperty("password"));
-        cartPage = homePage.clickOnCartLink();
+        //cartPage = homePage.clickOnCartLink();
         homePageTest = new HomePageTest();
+        homePageTest.setUp();
 
     }
 
@@ -65,10 +66,11 @@ public class CartPageTest extends TestBase {
     }
 
     @Test
-    public void actionContinueShoppingButton() throws InterruptedException {
+    public HomePage actionContinueShoppingButton() throws InterruptedException {
 
         homePage = cartPage.clickContinueShoppingButton();
         Thread.sleep(2000);
+        return homePage;
     }
 
 //    @Test
@@ -87,12 +89,16 @@ public class CartPageTest extends TestBase {
 //        }
 //    }
 
-
     @Test
     public void actionCheckOutButton() throws InterruptedException {
+
+       cartPage = homePageTest.selectIphoneToCart();
+        Thread.sleep(2000);
+
         ordersPage = cartPage.actionCheckOutButton();
         Thread.sleep(2000);
     }
+
 
 
         @AfterMethod

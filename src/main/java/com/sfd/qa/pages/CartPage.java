@@ -1,6 +1,7 @@
 package com.sfd.qa.pages;
 
 import com.nar.qa.base.TestBase;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -17,13 +18,8 @@ public class CartPage extends TestBase {
     @FindBy(xpath=("//button[@type='button']"))
     WebElement ContinueShoppingButton;
 
-    @FindBy(xpath=("//button[normalize-space()='Continue Shopping']"))
+    @FindBy(xpath=("//button[normalize-space()='Checkout']"))
     WebElement CheckOutButton;
-
-    HomePage homePage;
-
-
-
 
     public CartPage() {
 

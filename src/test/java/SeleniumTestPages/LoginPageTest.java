@@ -50,6 +50,7 @@ public class LoginPageTest extends TestBase {
     public void getLinkCount(){
 
         loginPage.GetAllLinks();
+
     }
 
     @AfterMethod

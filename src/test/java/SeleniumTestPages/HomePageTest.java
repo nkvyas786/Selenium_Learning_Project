@@ -23,9 +23,9 @@ import static junit.framework.Assert.assertEquals;
 
 public class HomePageTest extends TestBase {
     WebDriverWait wait;
-    WebDriver driver;
+    private WebDriver driver;
     LoginPage loginPage;
-    HomePage homePage;
+    private HomePage homePage;
     OrdersPage ordersPage;
     CartPage cartPage;
 
@@ -134,6 +134,19 @@ public class HomePageTest extends TestBase {
         Thread.sleep(2000);
         homePage.clickOnCartLink();
         Thread.sleep(2000);
+        driver.findElement(By.xpath("//button[normalize-space()='Checkout']")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//input[@class='input txt'][1]")).sendKeys("123");
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//div[normalize-space()='Name on Card']/input")).sendKeys("Narendra");
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//input[@placeholder='Select Country']")).sendKeys("India");
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//button[normalize-space()='Place Order']")).click();
+        Thread.sleep(2000);
+
+
+
     }
   //  public void addToCartIphone () {
 //        By addToCartButton = By.xpath("//b[normalize-space()='IPHONE 13 PRO']//parent::h5//following-sibling::button[2]//child::i[@class='fa fa-shopping-cart']");
