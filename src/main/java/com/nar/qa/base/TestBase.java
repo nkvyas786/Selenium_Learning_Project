@@ -1,76 +1,86 @@
 package com.nar.qa.base;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
+import jdk.jpackage.internal.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import utils.ConfigReader;
 import utils.TestUtil;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-public class TestBase {
+public abstract class TestBase {
 
-    public static WebDriver driver;
-    public static Properties prop;
+  protected static WebDriver driver;
 
-    public TestBase(){
-    try {
-        prop = new Properties();
-        FileInputStream fis;
-        fis = new FileInputStream("/Users/nivivyas/Documents/UI_Projects/src/main/java/resources/GlobalData.properties");
-        prop.load(fis);
+  public TestBase() {
+    ConfigReader.loadConfig();
+  }
 
-    } catch (FileNotFoundException e) {
-        e.printStackTrace();
-    } catch (IOException e) {
-        e.printStackTrace();
+  public static WebDriver initialization() {
+    String browserName = System.getProperty("browser") != null ? System.getProperty("browser") : ConfigReader.getProp("browser");
+
+    switch (browserName.toLowerCase()) {
+      case "firefox":
+        WebDriverManager.firefoxdriver().setup();
+        driver = new FirefoxDriver();
+        break;
+      case "edge":
+        WebDriverManager.edgedriver().setup();
+        driver = new EdgeDriver();
+        break;
+      case "chrome":
+      default:
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
     }
+
+    return driver;
+  }
+
+//            if (browserName.equalsIgnoreCase("chrome")) {
+//                WebDriverManager.chromedriver().setup();
+//                driver = new ChromeDriver();
+//            }
+//            else if (browserName.equalsIgnoreCase("firefox")) {
+//            }
+//            else if (browserName.equalsIgnoreCase("edge")) {
+//            }
+
+  //headless browser setup
+  //ChromeOptions options = new ChromeOptions();
+  //WebDriverManager.chromedriver().setup();
+  // driver = new ChromeDriver(options);
+  // options.addArguments("headless");
+
+  //driver.manage().window().setSize(new Dimension(1920, 1080));
+
+  @BeforeClass
+  public void setUp() {
+
+    initialization();
+    driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
+    driver.manage().window().maximize();
+    driver.manage().deleteAllCookies();
+
+//    Navigation to App URL
+    driver.navigate().to(ConfigReader.getProp("url"));
+    driver.get(ConfigReader.getProp("url"));
+  }
+
+  @AfterClass
+  public void tearDown() {
+    if (driver != null) {
+      driver.quit();
     }
-
-    public static void initialization() {
-//            prop = new Properties();
-//            FileInputStream fis = new FileInputStream(System.getProperty("user.dir")
-//                    + "//src//main//java//resources//GlobalData.properties");
-//            prop.load(fis);
-        //String browserName = prop.getProperty("browser");
-        String browserName = System.getProperty("browser")!=null ? System.getProperty("browser") : prop.getProperty("browser");
-
-            if (browserName.equalsIgnoreCase("chrome")) {
-                WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
-            }
-            else if (browserName.equalsIgnoreCase("firefox")) {
-            }
-            else if (browserName.equalsIgnoreCase("edge")) {
-            }
-
-        //headless browser setup
-        //ChromeOptions options = new ChromeOptions();
-        //WebDriverManager.chromedriver().setup();
-        // driver = new ChromeDriver(options);
-        // options.addArguments("headless");
-
-        //driver.manage().window().setSize(new Dimension(1920, 1080));
-
-
-//        WebDriverManager.chromedriver().setup();
-//        driver = new ChromeDriver();
-
-        driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.manage().deleteAllCookies();
-
-        //Navigation to App URL
-        driver.navigate().to(prop.getProperty("url"));
-        //driver.get(prop.getProperty("url"));
-        //driver.navigate().to("https://rahulshettyacademy.com/client");
-        //driver.get("https://rahulshettyacademy.com/client");
-
-
-    }
+  }
 }
 
 

@@ -8,8 +8,9 @@ import org.openqa.selenium.support.PageFactory;
 import java.io.IOException;
 import java.util.List;
 
-public class LoginPage extends TestBase{
+public class LoginPage {
 
+    WebDriver driver;
 
     //PageFactoryConfiguration
     @FindBy(id = "userEmail")
@@ -26,42 +27,37 @@ public class LoginPage extends TestBase{
 
 
     //initializing the Page Objects:
-    public LoginPage(){
+    public LoginPage(WebDriver driver){
         //super();
-
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
     public HomePage loginApplication(String email, String passWord) throws IOException {
-
         try {
             username.sendKeys(email);
-            Thread.sleep(2000);
             password.sendKeys(passWord);
-            Thread.sleep(2000);
             loginButton.click();
-            Thread.sleep(2000);
         }
-        catch (InterruptedException e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
         return new HomePage();
-
         }
 
     public String PageTitle() {
-
        return driver.getTitle();
     }
+
     public String validateCurrentURL() {
-
         return driver.getCurrentUrl();
-
-    }
-    public void GetAllLinks() {
-        for (WebElement link : links) {
-            System.out.println(link.getText());
-        }
     }
 
+    public int GetAllLinks() {
+//        for (WebElement link : links) {
+//            System.out.println(link.getText());
+//        }
+        System.out.println("------in page----"+links.size());
+        return links.size();
+    }
 }
