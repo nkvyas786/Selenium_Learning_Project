@@ -82,14 +82,6 @@ public class HomePageTest extends TestBase {
         System.out.println("Orders Page is clicked");
     }
 
-    @Test
-    public void clickOnCartPageLink() {
-        cartPage =  homePage.clickOnCartLink();
-        System.out.println("Cart Page is clicked");
-
-    }
-
-
 
 //@Test
 //    public void selectAllCheckBoxes(){

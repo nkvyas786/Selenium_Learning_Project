@@ -24,11 +24,14 @@ public class HomePage extends TestBase {
   @FindBy(xpath = "//button[@routerlink='/dashboard/myorders']")
   WebElement ordersLink;
 
-  @FindBy(xpath = "//button[@routerlink='/dashboard/cart']")
-  WebElement cartLink;
-
   @FindBy(xpath = "//button[text()=' Sign Out ']")
   WebElement signOutBtn;
+
+  @FindBy(xpath = "(//label[normalize-space(text())='electronics']/preceding-sibling::input[@type='checkbox'])[2]")
+  WebElement electronicsCheckBox;
+
+  @FindBy(xpath= "//b[normalize-space()='IPHONE 13 PRO']//parent::h5//following-sibling::button[2]")
+  WebElement addToCartButton;
 
   //initializing the Page Objects:
   public HomePage(WebDriver driver) {
@@ -72,13 +75,6 @@ public class HomePage extends TestBase {
     return new OrdersPage(driver);
   }
 
-  public CartPage clickOnCartLink() {
-    if (cartLink.isDisplayed()) {
-      cartLink.click();
-    }
-    return new CartPage(driver);
-  }
-
   public boolean isSignOutBtnDisplayed() {
     return signOutBtn.isDisplayed();
   }
@@ -89,6 +85,16 @@ public class HomePage extends TestBase {
     }
   }
 
+  public void selectElectronics () {
+    if (electronicsCheckBox.isDisplayed() && electronicsCheckBox.isEnabled() && !electronicsCheckBox.isSelected()) {
+      electronicsCheckBox.click();
+    }}
+
+  public void addToCartIphone () {
+    if (addToCartButton.isDisplayed() && addToCartButton.isEnabled()) {
+      addToCartButton.click();
+    }
+  }
 }
 
 
