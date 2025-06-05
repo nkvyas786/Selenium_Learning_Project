@@ -1,7 +1,6 @@
 package com.nar.qa.base;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import jdk.jpackage.internal.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -63,7 +62,6 @@ public abstract class TestBase {
 
   @BeforeClass
   public void setUp() {
-
     initialization();
     driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
     driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);

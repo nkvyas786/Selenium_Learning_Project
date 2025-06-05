@@ -16,25 +16,19 @@ import java.io.IOException;
 
 public class OrderPageTest extends TestBase {
 
-
     LoginPage loginPage;
     HomePage homePage;
-    LoginPageTest loginPageTest;
     OrdersPage ordersPage;
-    CartPage cartPage;
-
 
     public OrderPageTest() {
         super();
-
     }
 
     @BeforeMethod
-    public void setUp() throws IOException {
-        initialization();
-        loginPage = new LoginPage();
-        homePage = loginPage.loginApplication(prop.getProperty("username"), prop.getProperty("password"));
-        ordersPage = homePage.clickOnOrdersLink();
+    public void setUpPageObjects() throws IOException {
+        loginPage = new LoginPage(driver);
+        homePage = new HomePage(driver);
+        ordersPage = new OrdersPage(driver);
     }
 
     @Test

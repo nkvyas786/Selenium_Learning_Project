@@ -1,4 +1,5 @@
 package com.sfd.qa.pages;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import com.nar.qa.base.TestBase;
 import org.openqa.selenium.WebElement;
@@ -33,6 +34,7 @@ public class LoginPage {
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Login with username & password")
     public HomePage loginApplication(String email, String passWord) throws IOException {
         try {
             username.sendKeys(email);
@@ -42,7 +44,7 @@ public class LoginPage {
         catch (Exception e) {
             e.printStackTrace();
         }
-        return new HomePage();
+        return new HomePage(driver);
         }
 
     public String PageTitle() {

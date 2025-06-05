@@ -15,29 +15,24 @@ import java.util.Set;
 
 import static junit.framework.Assert.assertEquals;
 
-
 public class HomePageTest extends TestBase {
 
     LoginPage loginPage;
     HomePage homePage;
-    LoginPageTest loginPageTest;
     OrdersPage ordersPage;
     CartPage cartPage;
-
 
     //constructor
     public HomePageTest() {
         super();
-
-        //this.loginPageTest = new LoginPageTest();
-
     }
 
     @BeforeMethod
-    public void setUp() throws IOException {
-        initialization();
-        loginPage = new LoginPage();
-        homePage = loginPage.loginApplication(prop.getProperty("username"), prop.getProperty("password"));
+    public void setUpPageObjects() throws IOException {
+        loginPage = new LoginPage(driver);
+        homePage = new HomePage(driver);
+        ordersPage = new OrdersPage(driver);
+        cartPage = new CartPage(driver);
     }
 
     @Test(priority=0)
@@ -49,13 +44,11 @@ public class HomePageTest extends TestBase {
 
     @Test(priority=1, retryAnalyzer = Retry.class)
     public void productListCount() {
-
         homePage.getProductList();
     }
 
     @Test(priority=2)
     public void getCheckBoxDetailThenClick(){
-
         homePage.getCheckBoxesAndClick();
     }
 

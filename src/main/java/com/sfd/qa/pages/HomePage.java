@@ -1,6 +1,7 @@
 package com.sfd.qa.pages;
 
 import com.nar.qa.base.TestBase;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -8,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class HomePage extends TestBase {
+
+  WebDriver driver;
 
   @FindBy(css = ".col-lg-4")
   List<WebElement> productList;
@@ -28,9 +31,9 @@ public class HomePage extends TestBase {
   WebElement signOutBtn;
 
   //initializing the Page Objects:
-  public HomePage() {
+  public HomePage(WebDriver driver) {
+    this.driver = driver;
     PageFactory.initElements(driver, this);
-
   }
 
   public String verifyHomePageTitle() {
@@ -66,14 +69,14 @@ public class HomePage extends TestBase {
     if (ordersLink.isDisplayed()) {
       ordersLink.click();
     }
-    return new OrdersPage();
+    return new OrdersPage(driver);
   }
 
   public CartPage clickOnCartLink() {
     if (cartLink.isDisplayed()) {
       cartLink.click();
     }
-    return new CartPage();
+    return new CartPage(driver);
   }
 
   public boolean isSignOutBtnDisplayed() {
