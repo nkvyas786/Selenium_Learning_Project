@@ -2,6 +2,7 @@ package com.nar.qa.base;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import utils.TestUtil;
 
 import java.io.FileInputStream;
@@ -34,6 +35,8 @@ public class TestBase {
 //                    + "//src//main//java//resources//GlobalData.properties");
 //            prop.load(fis);
         //String browserName = prop.getProperty("browser");
+
+
         String browserName = System.getProperty("browser")!=null ? System.getProperty("browser") : prop.getProperty("browser");
 
             if (browserName.equalsIgnoreCase("chrome")) {
@@ -45,11 +48,11 @@ public class TestBase {
             else if (browserName.equalsIgnoreCase("edge")) {
             }
 
-        //headless browser setup
-        //ChromeOptions options = new ChromeOptions();
-        //WebDriverManager.chromedriver().setup();
-        // driver = new ChromeDriver(options);
-        // options.addArguments("headless");
+//       // headless browser setup
+//        ChromeOptions options = new ChromeOptions();
+//        WebDriverManager.chromedriver().setup();
+//         driver = new ChromeDriver(options);
+//         options.addArguments("headless");
 
         //driver.manage().window().setSize(new Dimension(1920, 1080));
 

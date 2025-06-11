@@ -1,17 +1,27 @@
 package utils;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.Duration;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 import org.openqa.selenium.WebElement;
 
+import static java.awt.SystemColor.window;
 
 
 public class TestUtil {
@@ -34,6 +44,44 @@ public class TestUtil {
         ExtentReportUtility.config();
 
     }
+
+
+    public  void excelRead() throws IOException {
+
+        File file = new File("C:\\Users\\User\\IdeaProjects\\AutomationFramework\\src\\main\\resources\\testdata.xlsx");
+        FileInputStream inputStream = new FileInputStream(file);
+        XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+
+        XSSFSheet sheet = workbook.getSheet("workbook");
+
+
+    }
+
+    public static void scrollPageDown(WebDriver driver){
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,1500)", "");
+
+
+    }
+
+
+    public static void scrollPageUp(WebDriver driver){
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,-1500)", "");
+
+
+    }
+
+
+
+
+
+
+
+
+
 
 
 

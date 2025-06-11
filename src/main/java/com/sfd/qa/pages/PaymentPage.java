@@ -28,6 +28,9 @@ public class PaymentPage extends TestBase {
     @FindBy(xpath="//div[@class='form-group']/input[@class='input txt text-validated']")
     WebElement countryField;
 
+    @FindBy(xpath="//span[normalize-space()='India']")
+    WebElement optionIndia;
+
     @FindBy(xpath="//a[@class='btnn action__submit ng-star-inserted']")
     WebElement placeOrderButton;
 
@@ -40,7 +43,8 @@ public class PaymentPage extends TestBase {
 
 
     public ConfirmationPage placeOrder() {
-       if (creditCardButton.isDisplayed() && !creditCardButton.isEnabled()) {
+
+        if (creditCardButton.isDisplayed() && !creditCardButton.isEnabled()) {
            creditCardButton.click();
     }
 
@@ -66,9 +70,11 @@ public class PaymentPage extends TestBase {
 
     if (countryField.isDisplayed() && countryField.isEnabled()) {
 
-
-
         countryField.sendKeys("India");
+
+        if (optionIndia.isDisplayed() && optionIndia.isEnabled()) {
+            optionIndia.click();
+        }
 
     }
 

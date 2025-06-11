@@ -5,9 +5,10 @@
         <listener class-name="com.listeners.Listener"/>
     </listeners>
 
-    <test name="Integration Testing" >
+    <test name="Integration Testing" preserve-order="true">
+
         <classes>
-<!--            <class name="SeleniumTestPages.LoginPageTest" />-->
+            <class name="SeleniumTestPages.LoginPageTest" />
             <class name="SeleniumTestPages.HomePageTest" />
         </classes>
     </test>

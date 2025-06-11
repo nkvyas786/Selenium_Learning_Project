@@ -51,8 +51,7 @@ public class PaymentPageTest extends TestBase {
         Thread.sleep(2000);
 
         confirmationPage = paymentPage.placeOrder();
-        Thread.sleep(2000);
-
+        Thread.sleep(4000);
 
     }
 
